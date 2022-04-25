@@ -2,7 +2,7 @@ export default function ImagePopup(props) {
   return (
       <div
       className={`modal modal_type_${props.name} ${
-        props.isOpen ? "modal_open" : ""
+        props.isOpen && "modal_open"
       }`}
     >
 

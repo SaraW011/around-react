@@ -7,7 +7,7 @@ import ImagePopup from "./ImagePopup";
 
 function App() {
   //determine the presence of the CSS visibility class and specifies the image address in the img tag.
-  const [selectedCard, setSelectedCard] = React.useState(false,{});
+  const [selectedCard, setSelectedCard] = React.useState({});
 
   // state variables responsible for the visibility of three popups:
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
@@ -16,8 +16,13 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
 
+    const [isPreviewImageOpen, setIsPreviewImageOpen] =
+    React.useState(false);
+
+
   function handleCardClick(card) {
     setSelectedCard(card);
+    setIsPreviewImageOpen(true)
   }
 
   function handleEditAvatarClick() {
@@ -34,18 +39,23 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setSelectedCard(false);
+    setIsPreviewImageOpen(false)
+
+    setSelectedCard({});
   }
 
-    React.useEffect(() => {
-      const handleEscClose = (event) => {
-        if (event.key === 'Escape') {
-          closeAllPopups();
-        }
+  React.useEffect(() => {
+    // code on mount
+    const handleEscClose = (event) => {
+      if (event.key === "Escape") {
+        closeAllPopups();
       }
+    };
 
-      document.addEventListener('keydown', handleEscClose);
-  })
+    document.addEventListener("keydown", handleEscClose);
+    // code on unmount
+    return () => document.removeEventListener("keydown", handleEscClose);
+  }, []); // dependencies array
 
   return (
     <div className="page">
@@ -149,10 +159,12 @@ function App() {
         <ImagePopup
           name="preview-image"
           onClose={closeAllPopups}
-          isOpen={selectedCard}
+          isOpen={isPreviewImageOpen}
+
           imageLink={selectedCard.link}
           imageText={selectedCard.name}
-        />
+          
+          />
         <Footer />
       </div>
     </div>

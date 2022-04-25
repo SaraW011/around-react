@@ -1,12 +1,10 @@
-export default function Card(props) {
+export default function Card({onCardClick, card}) {
 
     function handleClick() {
-      props.onCardClick(props.card);
+      onCardClick(card);
     }
-    
   
     return (
-      // <template className ="elements-template">
       <li className="elements__element">
         <button
           className="elements__trash elements__trash_disabled"
@@ -16,13 +14,13 @@ export default function Card(props) {
   
         <img 
         className="elements__image" 
-        src={props.card.link}
-        alt={props.card.name}
+        src={card.link}
+        alt={card.name}
         onClick={handleClick}
         />
   
         <div className="elements__info">
-          <h2 className="elements__text">{props.card.name}</h2>
+          <h2 className="elements__text">{card.name}</h2>
           <div className="elements__like-container">
             <button
               className="elements__heart"
@@ -34,7 +32,6 @@ export default function Card(props) {
           </div>
         </div>
       </li>
-      //  </template>
     );
   }
   

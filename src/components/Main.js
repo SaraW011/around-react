@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import Card from "./Card";
 import api from "../utils/Api";
 
-export default function Main(props) {
+export default function Main({
+  onEditAvatarClick,
+  onEditProfileClick,
+  onAddPlaceClick,
+  onCardClick,
+}) {
   const [userName, setUserName] = useState("");
   const [userDescription, setUserDescription] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
@@ -44,7 +49,7 @@ export default function Main(props) {
           />
 
           <button
-            onClick={props.onEditAvatarClick}
+            onClick={onEditAvatarClick}
             type="button"
             aria-label="edit-avatar-button"
             className="profile__avatar-edit-button"
@@ -56,7 +61,7 @@ export default function Main(props) {
             <h1 className="profile__name">{userName}</h1>
 
             <button
-              onClick={props.onEditProfileClick}
+              onClick={onEditProfileClick}
               aria-label="edit-button"
               type="button"
               className="profile__edit-button"
@@ -68,7 +73,7 @@ export default function Main(props) {
         </div>
 
         <button
-          onClick={props.onAddPlaceClick}
+          onClick={onAddPlaceClick}
           type="button"
           aria-label="add-button"
           className="profile__add-button"
@@ -78,11 +83,7 @@ export default function Main(props) {
       <section className="elements">
         <ul className="elements__list">
           {cards.map((element) => (
-            <Card
-              card={element}
-              key={element._id}
-              onCardClick={props.onCardClick}
-            />
+            <Card card={element} key={element._id} onCardClick={onCardClick} />
           ))}
         </ul>
       </section>

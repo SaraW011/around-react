@@ -2,7 +2,7 @@ export default function PopupWithForm(props) {
   return (
     <div
       className={`modal modal_type_${props.name} ${
-        props.isOpen ? "modal_open" : ""
+        props.isOpen  && "modal_open"
       }`}
     >
       <div className="modal__container">
